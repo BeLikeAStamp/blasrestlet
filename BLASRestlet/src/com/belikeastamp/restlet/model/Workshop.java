@@ -2,8 +2,10 @@ package com.belikeastamp.restlet.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Id;
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
 
+@Entity
 public class Workshop implements Serializable {
 	
 	/**
@@ -13,8 +15,7 @@ public class Workshop implements Serializable {
 	/**
 	 * 
 	 */
-	@Id
-	private Long id;
+	@Id private Long id;
 	private String theme;
 	private String address;
 	private String hostname;

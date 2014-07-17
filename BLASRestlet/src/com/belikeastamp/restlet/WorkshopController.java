@@ -2,6 +2,7 @@ package com.belikeastamp.restlet;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.restlet.resource.ServerResource;
 
@@ -32,6 +33,9 @@ WorkshopControllerInterface {
 		tp.setTheme(ws.getTheme());
 		tp.setTown(ws.getTown());
 
+		Logger log = Logger.getGlobal();
+		log.fine("I'm HERE !");
+		
 		ofy.save().entity(tp).now();
 	}
 
@@ -47,6 +51,8 @@ WorkshopControllerInterface {
 		List<Workshop> l = ofy.load().type(Workshop.class).list();
 		for(Workshop w : l)
 			workshops.add(w);
+		Logger log = Logger.getGlobal();
+		log.fine("I'm HERE !");
 		
 		content = new Container();
 		content.setWkList(workshops);

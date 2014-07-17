@@ -3,51 +3,60 @@ package com.belikeastamp.restlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.juli.logging.Log;
+
+import com.belikeastamp.restlet.model.Workshop;
+import com.google.gson.Gson;
+import com.googlecode.objectify.Objectify;
+import com.googlecode.objectify.ObjectifyService;
 
 public class RestletServlet extends HttpServlet {
 
-	/**
-	 * 
-	 */
+	/*static {
+		ObjectifyService.register(Workshop.class);
+	}*/
+
 	private static final long serialVersionUID = -2152739529939732870L;
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
-		Enumeration parameterNames = 
-				req.getParameterNames();
+		ObjectifyService.register(Workshop.class);
+		Objectify ofy = ObjectifyService.begin();
 
-		// acquire text stream for response
-		PrintWriter out = resp.getWriter ();
-
-		while (parameterNames.hasMoreElements()) {
-			String name = 
-					(String)parameterNames.nextElement();
-			String value = req.getParameter(name);
-			out.println(name + " = " + value + "<br/>");
-		}
+		List<Workshop> l = ofy.load().type(Workshop.class).list();
+		
+		Gson gson = new Gson();
+	    String json = gson.toJson(l);
+	    System.out.println(json);
+		//resp.setContentType("text/plain");
+		//resp.getWriter().println("Hello, world : '"+json+"'");
+	    resp.setHeader("User-Agent", "My Custom Header");
+		resp.getWriter().write(json);
 	}
 
 	public void doPut(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 
-		resp.setContentType("text/html");
-		PrintWriter writer = resp.getWriter();
-
-		// servlet configuration initialization parameters
-		Enumeration params = 
-				getServletConfig().getInitParameterNames();
-		while (params.hasMoreElements()) 
-		{
-			String param = (String) params.nextElement();
-			String value = 
-					getServletConfig().getInitParameter(param);
-			writer.println(param + " = " + value);
-		}
+		String theme = req.getParameter("theme");
+		String address = req.getParameter("address");
+		String town = req.getParameter("town");
+		String date = req.getParameter("date");
+		String hostname = req.getParameter("hostname");
+		Integer capacity = Integer.valueOf(req.getParameter("capacity"));
+		Integer registered = Integer.valueOf(req.getParameter("registered"));
+		
+		Workshop ws = new Workshop(theme,address,hostname,town,date,capacity, registered);
+		
+		ObjectifyService.register(Workshop.class);
+		Objectify ofy = ObjectifyService.begin();
+		// Enregistrement de l'objet dans le Datastore avec Objectify
+		ofy.save().entity(ws).now();
 	}
 
 }
