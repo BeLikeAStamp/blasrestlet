@@ -59,4 +59,16 @@ WorkshopControllerInterface {
 		return content;
 	}
 
+	@Override
+	public void update(Workshop ws) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
