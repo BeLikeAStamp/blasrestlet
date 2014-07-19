@@ -29,6 +29,16 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
       <url-pattern>/rest/workshop/*</url-pattern>
    </servlet-mapping>
 	
+   <servlet>
+      <servlet-name>UserRestletServlet</servlet-name>
+      <servlet-class>com.belikeastamp.restlet.UserRestletServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>UserRestletServlet</servlet-name>
+      <url-pattern>/rest/user/*</url-pattern>
+   </servlet-mapping>
+	
+   
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
