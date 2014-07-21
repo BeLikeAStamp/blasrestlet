@@ -13,7 +13,6 @@ import com.belikeastamp.restlet.model.User;
 import com.google.gson.Gson;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
-import com.googlecode.objectify.cmd.Query;
 
 public class UserRestletServlet extends HttpServlet {
 
@@ -28,7 +27,7 @@ public class UserRestletServlet extends HttpServlet {
 		LOGGER.setLevel(Level.INFO);
 		ObjectifyService.register(User.class);
 		Objectify ofy = ObjectifyService.begin();
-
+		//Query query 
 		String email = req.getParameter("email");
 		List<User> l;
 		
@@ -38,12 +37,7 @@ public class UserRestletServlet extends HttpServlet {
 		}
 		else
 		{
-			Query<User> q = ofy.load().type(User.class);
-			q = q.filter("email", email);
-			l = q.list();
-			/*User car = ofy.load().type(User.class).
-					query(User.class).filter("vin", "123456789").get();*/
-			
+			l = ofy.load().type(User.class).filter("email", email).list();			
 			LOGGER.info("Email NON null");
 		}
 		
