@@ -42,10 +42,10 @@ public class ProjectRestletServlet extends HttpServlet {
 		}
 		
 		if (status != null)
-			query = query.filter("status", status);
+			query = query.filter("status", Integer.valueOf(status));
 		
 		if (userId != null)
-			query = query.filter("userId", userId);
+			query = query.filter("userId", Long.valueOf(userId));
 		
 		l = query.list();			
 		
@@ -72,9 +72,11 @@ public class ProjectRestletServlet extends HttpServlet {
 		String perso = req.getParameter("perso");
 		Integer status = Integer.valueOf(req.getParameter("status"));
 		Integer quantity = Integer.valueOf(req.getParameter("quantity"));
+		String colors = req.getParameter("colors");
 		
 		Project p = new Project(userId, name, subDate, status, theme, type, orderDate, quantity, perso);
-
+		p.setColors(colors);
+		
 		ObjectifyService.register(Project.class);
 		Objectify ofy = ObjectifyService.begin();
 		// Enregistrement de l'objet dans le Datastore avec Objectify
@@ -93,10 +95,12 @@ public class ProjectRestletServlet extends HttpServlet {
 		String perso = req.getParameter("perso");
 		Integer status = Integer.valueOf(req.getParameter("status"));
 		Integer quantity = Integer.valueOf(req.getParameter("quantity"));
+		String colors = req.getParameter("colors");
 		
 		Project p = new Project(userId, name, subDate, status, theme, type, orderDate, quantity, perso);
 
 		p.setId(id);
+		p.setColors(colors);
 		
 		ObjectifyService.register(Project.class);
 		Objectify ofy = ObjectifyService.begin();

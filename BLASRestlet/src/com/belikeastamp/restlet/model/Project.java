@@ -22,7 +22,8 @@ public class Project implements Serializable {
 	private String type;
 	private String orderDate;
 	private String perso;
-	@Index private int status;
+	private String colors;
+	@Index private Integer status;
 	private int quantity;
 
 	public Project() {}
@@ -127,7 +128,7 @@ public class Project implements Serializable {
 
 
 
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
@@ -139,7 +140,7 @@ public class Project implements Serializable {
 
 
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 
@@ -153,6 +154,18 @@ public class Project implements Serializable {
 
 	public void setPerso(String perso) {
 		this.perso = perso;
+	}
+
+
+
+	public String getColors() {
+		return colors;
+	}
+
+
+
+	public void setColors(String colors) {
+		this.colors = colors;
 	}
 	
 	
