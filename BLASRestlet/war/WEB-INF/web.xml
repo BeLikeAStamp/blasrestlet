@@ -47,6 +47,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
       <url-pattern>/rest/project/*</url-pattern>
    </servlet-mapping>
    
+   <servlet>
+      <servlet-name>TutorialRestletServlet</servlet-name>
+      <servlet-class>com.belikeastamp.restlet.TutorialRestletServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>TutorialRestletServlet</servlet-name>
+      <url-pattern>/rest/tutorial/*</url-pattern>
+   </servlet-mapping>
+   
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
