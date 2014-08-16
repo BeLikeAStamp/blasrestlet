@@ -46,8 +46,9 @@ public class WorkshopRestletServlet extends HttpServlet {
 		String hostname = req.getParameter("hostname");
 		Integer capacity = Integer.valueOf(req.getParameter("capacity"));
 		Integer registered = Integer.valueOf(req.getParameter("registered"));
+		Integer price = Integer.valueOf(req.getParameter("price"));
 		
-		Workshop ws = new Workshop(theme,address,hostname,town,date,capacity, registered);
+		Workshop ws = new Workshop(theme,address,hostname,town,date,capacity, registered, price);
 		
 		ObjectifyService.register(Workshop.class);
 		Objectify ofy = ObjectifyService.begin();
@@ -65,8 +66,9 @@ public class WorkshopRestletServlet extends HttpServlet {
 		String hostname = req.getParameter("hostname");
 		Integer capacity = Integer.valueOf(req.getParameter("capacity"));
 		Integer registered = Integer.valueOf(req.getParameter("registered"));
+		Integer price = Integer.valueOf(req.getParameter("price"));
 		
-		Workshop ws = new Workshop(theme,address,hostname,town,date,capacity, registered);
+		Workshop ws = new Workshop(theme,address,hostname,town,date,capacity, registered, price);
 		ws.setId(id);
 		
 		ObjectifyService.register(Workshop.class);
