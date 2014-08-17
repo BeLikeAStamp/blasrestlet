@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xmlns="http://java.sun.com/xml/ns/javaee"
-xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
-http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
-	
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+
 	<context-param>
 		<param-name>org.restlet.application</param-name>
 		<param-value>com.belikeastamp.restlet.server.RestletDispatch</param-value>
 	</context-param>
-	
-	
+
+
 	<servlet>
 		<servlet-name>BLASRestlet</servlet-name>
 		<servlet-class>com.belikeastamp.restlet.BLASRestletServlet</servlet-class>
@@ -19,43 +19,54 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>BLASRestlet</servlet-name>
 		<url-pattern>/blasrestlet</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
-      <servlet-name>WorkshopRestletServlet</servlet-name>
-      <servlet-class>com.belikeastamp.restlet.WorkshopRestletServlet</servlet-class>
-   </servlet>
-   <servlet-mapping>
-      <servlet-name>WorkshopRestletServlet</servlet-name>
-      <url-pattern>/rest/workshop/*</url-pattern>
-   </servlet-mapping>
-	
-   <servlet>
-      <servlet-name>UserRestletServlet</servlet-name>
-      <servlet-class>com.belikeastamp.restlet.UserRestletServlet</servlet-class>
-   </servlet>
-   <servlet-mapping>
-      <servlet-name>UserRestletServlet</servlet-name>
-      <url-pattern>/rest/user/*</url-pattern>
-   </servlet-mapping>
-	
-   <servlet>
-      <servlet-name>ProjectRestletServlet</servlet-name>
-      <servlet-class>com.belikeastamp.restlet.ProjectRestletServlet</servlet-class>
-   </servlet>
-   <servlet-mapping>
-      <servlet-name>ProjectRestletServlet</servlet-name>
-      <url-pattern>/rest/project/*</url-pattern>
-   </servlet-mapping>
-   
-   <servlet>
-      <servlet-name>TutorialRestletServlet</servlet-name>
-      <servlet-class>com.belikeastamp.restlet.TutorialRestletServlet</servlet-class>
-   </servlet>
-   <servlet-mapping>
-      <servlet-name>TutorialRestletServlet</servlet-name>
-      <url-pattern>/rest/tutorial/*</url-pattern>
-   </servlet-mapping>
-   
+		<servlet-name>WorkshopRestletServlet</servlet-name>
+		<servlet-class>com.belikeastamp.restlet.WorkshopRestletServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WorkshopRestletServlet</servlet-name>
+		<url-pattern>/rest/workshop/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>UserRestletServlet</servlet-name>
+		<servlet-class>com.belikeastamp.restlet.UserRestletServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserRestletServlet</servlet-name>
+		<url-pattern>/rest/user/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ProjectRestletServlet</servlet-name>
+		<servlet-class>com.belikeastamp.restlet.ProjectRestletServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ProjectRestletServlet</servlet-name>
+		<url-pattern>/rest/project/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>TutorialRestletServlet</servlet-name>
+		<servlet-class>com.belikeastamp.restlet.TutorialRestletServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TutorialRestletServlet</servlet-name>
+		<url-pattern>/rest/tutorial/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>UploadServlet</servlet-name>
+		<servlet-class>com.belikeastamp.restlet.UploadServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>UploadServlet</servlet-name>
+		<url-pattern>/upload</url-pattern>
+	</servlet-mapping>
+
+
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>

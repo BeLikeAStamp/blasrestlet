@@ -50,7 +50,6 @@ public class ProjectRestletServlet extends HttpServlet {
 		l = query.list();			
 		
 		
-		LOGGER.info("Taille de l ='"+l.size()+"'");
 		Gson gson = new Gson();
 		String json = gson.toJson(l);
 		System.out.println(json);
