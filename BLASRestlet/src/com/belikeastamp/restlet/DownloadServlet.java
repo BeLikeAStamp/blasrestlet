@@ -2,7 +2,6 @@ package com.belikeastamp.restlet;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +21,7 @@ public class DownloadServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = -5707515699015240565L;
 
-	private final static Logger LOGGER = Logger.getLogger(DownloadServlet.class.getName()); 
+	//private final static Logger LOGGER = Logger.getLogger(DownloadServlet.class.getName()); 
 
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -31,11 +30,12 @@ public class DownloadServlet extends HttpServlet {
 		Objectify ofy = ObjectifyService.begin();
 		
 		Long correspondingId = Long.valueOf(req.getParameter("correspondance"));
+		String fileType = req.getParameter("type");
 		
 		Query<FileStorage> query = ofy.load().type(FileStorage.class);
 		
 		query = query.filter("correspondingId", correspondingId);
-		
+		query = query.filter("type", fileType);
 
 		List<FileStorage> l = query.list();	
 		

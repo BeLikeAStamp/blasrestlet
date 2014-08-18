@@ -4,7 +4,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,7 +21,6 @@ import com.googlecode.objectify.ObjectifyService;
 import com.oreilly.servlet.multipart.FilePart;
 import com.oreilly.servlet.multipart.MultipartParser;
 import com.oreilly.servlet.multipart.Part;
-import com.googlecode.objectify.cmd.Query;
 
 
 public class UploadServlet extends HttpServlet {
@@ -41,7 +39,8 @@ public class UploadServlet extends HttpServlet {
 		LOGGER.setLevel(Level.INFO);
 
 		Long correspondingId = Long.valueOf(request.getParameter("correspondance"));
-
+		String fileType = request.getParameter("type");
+		
 		LOGGER.info("ID ='"+correspondingId+"'");
 
 		String fileName = "";
@@ -60,7 +59,7 @@ public class UploadServlet extends HttpServlet {
 				ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 				Streams.copy(in, bytes, true /* close stream after copy */);
 				Blob blob = new Blob(bytes.toByteArray());
-				FileStorage tf = new FileStorage(correspondingId, blob); 
+				FileStorage tf = new FileStorage(correspondingId, fileType, blob); 
 				ObjectifyService.register(FileStorage.class);
 				Objectify ofy = ObjectifyService.begin();
 				// Enregistrement de l'objet dans le Datastore avec Objectify

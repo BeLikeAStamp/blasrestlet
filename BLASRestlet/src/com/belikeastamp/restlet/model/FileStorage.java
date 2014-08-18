@@ -17,6 +17,7 @@ public class FileStorage implements Serializable {
 	
 	@Id private Long id;
 	@Index private Long correspondingId;
+	@Index private String type;
 	private Blob file;
 	
 	public FileStorage() {}
@@ -29,12 +30,20 @@ public class FileStorage implements Serializable {
 		this.id = id;
 	}
 
-	public Long getTutorialId() {
+	public Long getCorrespondingId() {
 		return correspondingId;
 	}
 
-	public void setTutorialId(Long tutorialId) {
-		this.correspondingId = tutorialId;
+	public void setCorrespondingId(Long correspondingId) {
+		this.correspondingId = correspondingId;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public Blob getFile() {
@@ -45,17 +54,23 @@ public class FileStorage implements Serializable {
 		this.file = file;
 	}
 
-	public FileStorage(Long tutorialId, Blob file) {
+	public FileStorage(Long correspondingId, String type, Blob file) {
 		super();
-		this.correspondingId = tutorialId;
+		this.correspondingId = correspondingId;
+		this.type = type;
 		this.file = file;
 	}
 
 	@Override
 	public String toString() {
-		return "TutorialFile [id=" + id + ", tutorialId=" + correspondingId
-				+ ", file=" + file.hashCode() + "]";
+		return "FileStorage [id=" + id + ", correspondingId=" + correspondingId
+				+ ", type=" + type + ", file=" + file.hashCode() + "]";
 	}
+	
+	
+	
+
+	
 
 	
 	
