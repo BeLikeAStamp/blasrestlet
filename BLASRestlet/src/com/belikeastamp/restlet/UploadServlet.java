@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,6 +19,7 @@ import com.belikeastamp.restlet.model.FileStorage;
 import com.google.appengine.api.datastore.Blob;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
+import com.googlecode.objectify.cmd.Query;
 import com.oreilly.servlet.multipart.FilePart;
 import com.oreilly.servlet.multipart.MultipartParser;
 import com.oreilly.servlet.multipart.Part;
@@ -62,6 +64,17 @@ public class UploadServlet extends HttpServlet {
 				FileStorage tf = new FileStorage(correspondingId, fileType, blob); 
 				ObjectifyService.register(FileStorage.class);
 				Objectify ofy = ObjectifyService.begin();
+				// est-ce une maj de tuto deja existant ??
+				Query<FileStorage> query = ofy.load().type(FileStorage.class);
+				query = query.filter("correspondingId", correspondingId);
+
+				List<FileStorage> l = query.list();	
+				
+				if (l.size() > 0) {
+					// ce titre existe deja alos on ecrase
+					tf.setId(l.get(0).getId());
+				}
+				
 				// Enregistrement de l'objet dans le Datastore avec Objectify
 				ofy.save().entity(tf).now();
 			}

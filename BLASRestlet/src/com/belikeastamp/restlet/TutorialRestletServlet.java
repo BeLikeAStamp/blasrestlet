@@ -11,6 +11,7 @@ import com.belikeastamp.restlet.model.Tutorial;
 import com.google.gson.Gson;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
+import com.googlecode.objectify.cmd.Query;
 
 public class TutorialRestletServlet extends HttpServlet {
 
@@ -22,9 +23,9 @@ public class TutorialRestletServlet extends HttpServlet {
 	private static final String TAG_ID = "id";
 	private static final String TAG_TITLE = "title";
 	private static final String TAG_FILE = "file";
-	private static final String TAG_AVAIL = "availability";
+	private static final String TAG_AVAIL = "available";
 	private static final String TAG_DATE = "date";
-	private static final String TAG_DEMAND = "demand";
+	private static final String TAG_DEMAND = "onDemand";
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
@@ -50,11 +51,23 @@ public class TutorialRestletServlet extends HttpServlet {
 		String file = req.getParameter(TAG_FILE);
 		String date = req.getParameter(TAG_DATE);
 		String demand = req.getParameter(TAG_DEMAND);
-
+	
+		
 		Tutorial tuto = new Tutorial(title, Boolean.valueOf(avail), file, date, Integer.valueOf(demand));
 		
 		ObjectifyService.register(Tutorial.class);
 		Objectify ofy = ObjectifyService.begin();
+		
+		// ce titre existe-il deja ?
+		Query<Tutorial> query = ofy.load().type(Tutorial.class);
+		query = query.filter("title", title);
+		List<Tutorial> l = query.list();	
+		
+		if (l.size() > 0) {
+			// ce titre existe deja alos on ecrase
+			tuto.setId(l.get(0).getId());
+		}
+		
 		// Enregistrement de l'objet dans le Datastore avec Objectify
 		ofy.save().entity(tuto).now();
 	}

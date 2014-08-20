@@ -17,7 +17,7 @@ public class Tutorial implements Serializable {
 	@Id private Long id;
 	@Index String title;
 	String file;
-	Boolean availabale;
+	Boolean available;
 	String date;
 	Integer onDemand;
 	
@@ -26,7 +26,7 @@ public class Tutorial implements Serializable {
 	public Tutorial(String title, Boolean avail, String file, String date, Integer demand) {
 		super();
 		this.title = title;
-		this.availabale = avail;
+		this.available = avail;
 		this.file = file;
 		this.date = date;
 		this.onDemand = demand;
@@ -47,12 +47,12 @@ public class Tutorial implements Serializable {
 		this.title = title;
 	}
 	
-	public Boolean getAvailabale() {
-		return availabale;
+	public Boolean getAvailable() {
+		return available;
 	}
 
-	public void setAvailabale(Boolean availabale) {
-		this.availabale = availabale;
+	public void setAvailable(Boolean available) {
+		this.available = available;
 	}
 
 	public String getFile() {
@@ -76,11 +76,11 @@ public class Tutorial implements Serializable {
 	public void setOnDemand(Integer onDemand) {
 		this.onDemand = onDemand;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "Tutorial [title=" + title + ", file=" + file + ", availabale="
-				+ availabale + ", date=" + date + ", demand=" + onDemand + "]";
+		return "Tutorial [title=" + title + ", file=" + file + ", available="
+				+ available + ", date=" + date + ", demand=" + onDemand + "]";
 	}
 
 	
