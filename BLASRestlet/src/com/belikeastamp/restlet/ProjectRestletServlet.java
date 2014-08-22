@@ -65,7 +65,7 @@ public class ProjectRestletServlet extends HttpServlet {
 		Long userId = Long.valueOf(req.getParameter("userid"));
 		String name = req.getParameter("name");
 		String subDate = req.getParameter("subdate");
-		String theme = req.getParameter("theme");
+		String detail = req.getParameter("detail");
 		String type = req.getParameter("type");
 		String orderDate = req.getParameter("orderdate");
 		String perso = req.getParameter("perso");
@@ -73,7 +73,7 @@ public class ProjectRestletServlet extends HttpServlet {
 		Integer quantity = Integer.valueOf(req.getParameter("quantity"));
 		String colors = req.getParameter("colors");
 		
-		Project p = new Project(userId, name, subDate, status, theme, type, orderDate, quantity, perso);
+		Project p = new Project(userId, name, subDate, status, detail, type, orderDate, quantity, perso);
 		p.setColors(colors);
 		
 		ObjectifyService.register(Project.class);
@@ -88,7 +88,7 @@ public class ProjectRestletServlet extends HttpServlet {
 		Long userId = Long.valueOf(req.getParameter("userid"));
 		String name = req.getParameter("name");
 		String subDate = req.getParameter("subdate");
-		String theme = req.getParameter("theme");
+		String detail = req.getParameter("detail");
 		String type = req.getParameter("type");
 		String orderDate = req.getParameter("orderdate");
 		String perso = req.getParameter("perso");
@@ -96,7 +96,7 @@ public class ProjectRestletServlet extends HttpServlet {
 		Integer quantity = Integer.valueOf(req.getParameter("quantity"));
 		String colors = req.getParameter("colors");
 		
-		Project p = new Project(userId, name, subDate, status, theme, type, orderDate, quantity, perso);
+		Project p = new Project(userId, name, subDate, status, detail, type, orderDate, quantity, perso);
 
 		p.setId(id);
 		p.setColors(colors);
