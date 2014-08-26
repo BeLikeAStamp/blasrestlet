@@ -29,18 +29,30 @@ public class UserRestletServlet extends HttpServlet {
 		Objectify ofy = ObjectifyService.begin();
 		//Query query 
 		String email = req.getParameter("email");
+		String userId = req.getParameter("id");
+		
 		List<User> l;
 		
 		if (email == null) {
-			l = ofy.load().type(User.class).list();
-			LOGGER.info("Email null");
+			
+			if (userId == null) {
+				l = ofy.load().type(User.class).list();
+				LOGGER.info("Email null && userId null");
+			}
+			else
+			{
+				//ofy.load().key(userId)
+				l = ofy.load().type(User.class).filter("id", Long.valueOf(userId)).list();			
+				LOGGER.info("UserId NON null");
+			}
+			
 		}
 		else
 		{
 			l = ofy.load().type(User.class).filter("email", email).list();			
 			LOGGER.info("Email NON null");
 		}
-		
+
 		LOGGER.info("Taille de l ='"+l.size()+"'");
 		Gson gson = new Gson();
 		String json = gson.toJson(l);
