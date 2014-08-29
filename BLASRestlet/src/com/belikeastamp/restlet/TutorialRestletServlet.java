@@ -15,9 +15,6 @@ import com.googlecode.objectify.cmd.Query;
 
 public class TutorialRestletServlet extends HttpServlet {
 
-	/*static {
-		ObjectifyService.register(Tutorial.class);
-	}*/
 
 	private static final long serialVersionUID = -2152739529939732870L;
 	private static final String TAG_ID = "id";
@@ -37,8 +34,6 @@ public class TutorialRestletServlet extends HttpServlet {
 		Gson gson = new Gson();
 	    String json = gson.toJson(l);
 	    System.out.println(json);
-		//resp.setContentType("text/plain");
-		//resp.getWriter().println("Hello, world : '"+json+"'");
 	    resp.setHeader("User-Agent", "My Custom Header");
 		resp.getWriter().write(json);
 	}
