@@ -7,10 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.belikeastamp.restlet.model.Inscription;
 import com.belikeastamp.restlet.model.Workshop;
 import com.google.gson.Gson;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
+import com.googlecode.objectify.cmd.Query;
 
 public class WorkshopRestletServlet extends HttpServlet {
 
@@ -25,14 +27,23 @@ public class WorkshopRestletServlet extends HttpServlet {
 		ObjectifyService.register(Workshop.class);
 		Objectify ofy = ObjectifyService.begin();
 
-		List<Workshop> l = ofy.load().type(Workshop.class).list();
+		String id = req.getParameter("id");
+		
+		List<Workshop> l;
+		
+		Query<Workshop> query = ofy.load().type(Workshop.class);
+		
+		if (id != null)
+			query = query.filter("id", Long.valueOf(id));
+		
+		l = query.list();	
 		
 		Gson gson = new Gson();
 	    String json = gson.toJson(l);
 	    System.out.println(json);
-		//resp.setContentType("text/plain");
-		//resp.getWriter().println("Hello, world : '"+json+"'");
+
 	    resp.setHeader("User-Agent", "My Custom Header");
+	    resp.setCharacterEncoding("UTF-8");
 		resp.getWriter().write(json);
 	}
 

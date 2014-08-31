@@ -19,12 +19,15 @@ public class InscriptionRestletServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = -6301082063204167890L;
 	private static final String TAG_ID = "id";
-	private static final String TAG_WID = "workshopid";
+	private static final String TAG_WID = "workshopId";
 	private static final String TAG_NAME = "name";
-	private static final String TAG_PHONE = "number";
+	private static final String TAG_PHONE = "phoneNumber";
 	private static final String TAG_EMAIL = "email";
 	private static final String TAG_EXPERT = "expertise";
-	private static final String TAG_PART = "participant";
+	private static final String TAG_DATE = "inscriptionDate";
+	private static final String TAG_STATUS = "inscriptionStatus";
+	private static final String TAG_PART = "partcipants";
+
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
@@ -37,6 +40,7 @@ public class InscriptionRestletServlet extends HttpServlet {
 	    String json = gson.toJson(l);
 	    System.out.println(json);
 	    resp.setHeader("User-Agent", "My Custom Header");
+	    resp.setCharacterEncoding("UTF-8");
 		resp.getWriter().write(json);
 	}
 	
@@ -48,9 +52,12 @@ public class InscriptionRestletServlet extends HttpServlet {
 		String phone = req.getParameter(TAG_PHONE);
 		String email = req.getParameter(TAG_EMAIL);
 		String expertise = req.getParameter(TAG_EXPERT);
+		String date = req.getParameter(TAG_DATE);
+		String status = req.getParameter(TAG_STATUS);
 		Integer partcipants =  Integer.valueOf(req.getParameter(TAG_PART));
 	
-		Inscription i = new Inscription(workshopId, name, phone, email, expertise, partcipants);
+		Inscription i = new Inscription(workshopId, name, phone, email, expertise, date, partcipants);
+		if(status != null) i.setInscriptionStatus(status);
 		ObjectifyService.register(Inscription.class);
 		Objectify ofy = ObjectifyService.begin();
 		
@@ -67,9 +74,12 @@ public class InscriptionRestletServlet extends HttpServlet {
 		String phone = req.getParameter(TAG_PHONE);
 		String email = req.getParameter(TAG_EMAIL);
 		String expertise = req.getParameter(TAG_EXPERT);
+		String date = req.getParameter(TAG_DATE);
+		String status = req.getParameter(TAG_STATUS);
 		Integer partcipants =  Integer.valueOf(req.getParameter(TAG_PART));
 	
-		Inscription i = new Inscription(workshopId, name, phone, email, expertise, partcipants);
+		Inscription i = new Inscription(workshopId, name, phone, email, expertise, date, partcipants);
+		if(status != null) i.setInscriptionStatus(status);
 		i.setId(id);
 		
 		ObjectifyService.register(Inscription.class);

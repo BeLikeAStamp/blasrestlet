@@ -35,6 +35,7 @@ public class TutorialRestletServlet extends HttpServlet {
 	    String json = gson.toJson(l);
 	    System.out.println(json);
 	    resp.setHeader("User-Agent", "My Custom Header");
+	    resp.setCharacterEncoding("UTF-8");
 		resp.getWriter().write(json);
 	}
 

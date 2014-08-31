@@ -59,6 +59,7 @@ public class UserRestletServlet extends HttpServlet {
 		System.out.println(json);
 
 		resp.setHeader("User-Agent", "My Custom Header");
+		resp.setCharacterEncoding("UTF-8");
 		resp.getWriter().write(json);
 		
 	}
